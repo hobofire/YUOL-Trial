@@ -22,17 +22,17 @@
                 float: left;
             }
         </style>
-        <body>
-            <div id="header">页面头部</div>
-            <div id="middle">
-                <!--中间部分，宽度加起来刚好是100%-->
-                <div id="col1">主体部分第一列</div>
-                <div id="col2">主体部分第二列</div>
-                <div id="col3">主体部分第三列</div>
-            </div>
-            <div id="footer">页面尾部</div>
-        </body>
     </head>
+    <body>
+        <div id="header">页面头部</div>
+        <div id="middle">
+            <!--中间部分，宽度加起来刚好是100%-->
+            <div id="col1">主体部分第一列</div>
+            <div id="col2">主体部分第二列</div>
+            <div id="col3">主体部分第三列</div>
+        </div>
+        <div id="footer">页面尾部</div>
+    </body>
 </html>
 ```
 并且还提到说，这种写法可以更好地把页面的结构固定下来，防止某些浏览器（如IE7）相对落后的内核在缩放页面的时候使页面产生变形。这些都是在实践中积累起来的经验，看来我还是得多读书多写页面多总结才行呢。
