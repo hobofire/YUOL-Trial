@@ -1,0 +1,114 @@
+\section{第一周任务：国际学院主页}\label{ux7b2cux4e00ux5468ux4efbux52a1ux56fdux9645ux5b66ux9662ux4e3bux9875}
+
+\begin{frame}{概况}
+
+这大概是我个人独立开发的第二个真正意义上的``网页''吧（第一个是百度前端训练营的Task
+One，比这个简单很多），当初匆匆学习了\texttt{HTML}/\texttt{CSS}/\texttt{JavaScript}的基础部分以后就匆匆上手写出这个页面，也还有些小成就感，也确实通过这个准实战的项目注意到了很多之前没有注意到的东西。然而作为新手，不足固然是有的，还请各位多多指教。现在写下这样一篇总结，来整理这次开发中一些值得借鉴的东西。
+
+\end{frame}
+
+\begin{frame}[fragile]{版本更迭}
+
+这次页面一共做了三个版本，我暂且称他们为
+\texttt{v1.0}，\texttt{v2.0}，和\texttt{v2.1}，具体的内容会在下面提到。然而很可惜的是，我并没有对先前版本的代码进行备份，导致这篇总结只能根据回忆写就，之后把代码托管到GitHub以后情况就会好很多。
+
+\begin{block}{v1.0}
+
+这当然是一个``万丈高楼平地起''的阶段，在学习了初步的\texttt{HTML}和\texttt{CSS}以后，我怀着雄心壮志地打开了编辑器，希望做出一份让学长们眼前一亮的作业。在动笔之前，我当然F12过原版的网站，不过只是去抠素材，也顺便把原版的代码瞄过几眼，对这那些\textbf{看似}不符合所谓``语义化''的代码嗤之以鼻之后，便把原网页开着以便对照，在一行\texttt{\textless{}!DOCTYPE\ html\textgreater{}}中开始了我整个网页的开发。
+
+刚开始为整个页面居中的问题有些苦恼，也尝试了很多办法，看原版也没看出个所以然，后来还是在慕课网一个视频的启发下用了一个\texttt{div\#whole-wrap}把所有内容都包了起来才解决。
+
+调试的时候，也发现代码在IE7和IE8下会存在不同的兼容性问题，于是耍了点小聪明，从百度上复制了一行
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<meta}\OtherTok{ http-equiv=}\StringTok{"X-UA-Compatible"}\OtherTok{ content=}\StringTok{"IE=EmulateIE7"} \KeywordTok{/>} 
+\end{Highlighting}
+\end{Shaded}
+
+粘在网页的头部，企图一次性解决所有问题。
+
+也用各种\texttt{float}把页面排得还像那么回事儿，也明白了
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{* }\KeywordTok{\{}
+    \KeywordTok{margin} \ErrorTok{=} \ErrorTok{0;}
+    \ErrorTok{padding} \ErrorTok{=} \ErrorTok{0;}
+\ErrorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+是干什么的，没有像第一个页面那样，各种错位然后用各种\texttt{position:\ relative;}来贴膏药。
+
+\textbf{我对于\texttt{div+CSS}布局的理解是这样的：布局要根据页面的结构来，把页面抽象成表格来看待}（别担心，我清楚地知道\texttt{\textless{}table\textgreater{}}式布局是过时的，这里我是在阐释思路）\textbf{，看清页面中有哪些元素是按行/列结合的，哪些元素有相似的地方，再动笔写结构。力求让结构尽量清晰，容易理解，同时控制好规模，不缺失结构化，也不过度结构化。}
+
+处理菜单的时候，还用了时下流行的\texttt{CSS3}中的\texttt{box-shadow}属性小小地秀了一把。
+
+至于那个滚动照片墙，刚开始本来没打算写，后来还是在丁天学长的鼓励下，自己查资料，开脑洞，磕磕绊绊地总算还是自己弄出来了，效果看起来貌似还不错。
+
+对于编码风格，我之前写过\texttt{C}和\texttt{Python}，深知这个也是相当重要的。代码风格就是阅读代码的人对程序员的第一认知，说白了就是程序员的脸，我当然不能给自己丢脸不是。而且还学着一些网站把\texttt{CSS}，\texttt{JavaScript}和图片单独放了目录以后，觉得还真有那么点儿``做项目''的感觉。
+
+整体写完了以后，开了IE，FireFox和Chrome，看着觉得也还像那么回事（当时确实也自我宽容忽略了一些问题），那么，就这样，交了第一次作业。
+
+\end{block}
+
+\begin{block}{v2.0}
+
+等来了丁天学长的点评，有点长，我就不贴上来了。内容大致是先夸了我一番，然后指出了一些问题，主要是兼容性方面。这一版主要是解决这些问题，外加受到启发后自己解决的一些问题。
+
+一是项目符号的问题。\texttt{v1.0}版中，我本着语义化原则，用了一个比较新的\texttt{list-style-image}属性。然而我并没有考虑到学院网站服务人群的特殊性，很多用户至今仍在使用在我们看起来过时的IE7浏览器，没考虑到兼容性实在是因为经验不足；同时之前没有认真研读原版代码也暴露出我略有浮躁的性格，正像丁天学长所说，``做技术低调一点好''，这也是我以后要努力克服的一大弱点。回到这个问题本身，在改用了
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{#sample} \NormalTok{ul}\KeywordTok{\{}
+    \KeywordTok{list-style:} \DataTypeTok{none}\KeywordTok{;}
+\KeywordTok{\}}
+\FloatTok{#sample} \NormalTok{ul li}\KeywordTok{\{}
+    \KeywordTok{background:} \DataTypeTok{url(..}\NormalTok{/img/sample}\DataTypeTok{.}\NormalTok{jpg}\DataTypeTok{)} \DataTypeTok{0px} \DataTypeTok{center} \DataTypeTok{no-repeat}\KeywordTok{;}
+    \KeywordTok{text-indent:} \DataTypeTok{10px}\KeywordTok{;}
+\KeywordTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+这样的写法以后，兼容性问题果然解决掉了。
+
+二是IE下的一个定位问题，除了用\texttt{position:\ relative;}强行矫正以外别无他法，不提也罢。
+
+三是\texttt{width}和\texttt{height}的问题，\texttt{v1.0}版本中我并没有强行指定各元素的宽高，而是任由浏览器``自由发挥''，这便带来了不小的兼容性困扰------各浏览器对\texttt{auto}的衡量标准不统一，导致各浏览器渲染出的页面产生了差异，这一问题在导航栏表现得尤为严重，之前强行开启IE7兼容也是因为这个。丁天学长指出了问题所在，并建议我手动指定各元素的宽高。照做后，果然，问题得到了解决。我马上用类似的思路，修正了其他我认为有问题的地方。
+
+至此，所有的兼容性问题几乎已被解决，页面终于在IE各版本和FireFox以及Chrome上完美呈现。提交第二次作业时，学长也能基本满意。
+
+\end{block}
+
+\begin{block}{v2.1}
+
+这次小修改源于我在阅读《高性能网站建设指南》之后。书中``将小的样式表和脚本内嵌于页面中，以减少HTTP请求''和``如果有条件，将JS脚本和CSS样式表压缩''的建议深得我心，于是我便照做了，并将这些建议记下，以服务于将来的开发。
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{一点小遗憾}
+
+这次提交的代码我空了一块小地方，原版页面的那个空白处是一个Flash轮播墙。我现在还不太清楚那种元素的呈现原理以及正确的使用方法，所以暂时没有完成。当然，这一定是我日后学习的方向之一。
+
+\end{frame}
+
+\begin{frame}{感悟}
+
+通过这次开发，我除了在技术方面注意到了很多理论学习不曾注意到的东西以外，更加体会到，作为一名开发人员，缜密的思维、认真的态度和谦逊的心态是必不可少的。这些对我无论是在开发上，还是对我日常的学习生活，都有很强的指导意义，我会记住并努力地去践行。
+
+\end{frame}
+
+\begin{frame}[fragile]{之后的短期学习计划}
+
+继续阅读《JavaScript语言精粹》和《高性能网站建设指南》，进一步加深对\texttt{JavaScript}和网站整体性能优化的理解；学习\texttt{jQuery}的更多接口并初步接触\texttt{Ajax}技术；开始接触服务器系统，并尝试使用\texttt{IIS}。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{return} \DecValTok{0}\NormalTok{;       }\CommentTok{//;)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
